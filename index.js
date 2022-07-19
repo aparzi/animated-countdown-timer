@@ -60,12 +60,11 @@ function onTimesUp() {
 function startTimer() {
     console.log('start timer...');
     let timePassed = 0;
-    timeLeft = TIME_LIMIT + 1;
-    remainingPathColor = COLOR_CODES.info.color;
+    setRemainingPathColor(20);
     onTimesUp();
     timerInterval = setInterval(() => {
         timePassed = timePassed += 1;
-        timeLeft = TIME_LIMIT - timePassed;
+        timeLeft = (TIME_LIMIT + 1) - timePassed;
         document.getElementById("base-timer-label").innerHTML = formatTime(
             timeLeft
         );
@@ -110,6 +109,16 @@ function setRemainingPathColor(timeLeft) {
         document
             .getElementById("base-timer-path-remaining")
             .classList.add(warning.color);
+    } else {
+        document
+            .getElementById("base-timer-path-remaining")
+            .classList.remove(alert.color);
+        document
+            .getElementById("base-timer-path-remaining")
+            .classList.remove(warning.color);
+        document
+            .getElementById("base-timer-path-remaining")
+            .classList.add(info.color);
     }
 }
 
