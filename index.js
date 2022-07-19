@@ -17,7 +17,6 @@ const COLOR_CODES = {
 };
 
 const TIME_LIMIT = 20;
-let timePassed = 0;
 let timeLeft = TIME_LIMIT;
 let timerInterval = null;
 let remainingPathColor = COLOR_CODES.info.color;
@@ -46,13 +45,24 @@ document.getElementById("app").innerHTML = `
 </div>
 `;
 
-startTimer();
+
+function restartTimer() {
+    startTimer();
+}
 
 function onTimesUp() {
-    clearInterval(timerInterval);
+    console.log('clear timer...');
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
 }
 
 function startTimer() {
+    console.log('start timer...');
+    let timePassed = 0;
+    timeLeft = TIME_LIMIT + 1;
+    remainingPathColor = COLOR_CODES.info.color;
+    onTimesUp();
     timerInterval = setInterval(() => {
         timePassed = timePassed += 1;
         timeLeft = TIME_LIMIT - timePassed;
@@ -66,6 +76,11 @@ function startTimer() {
             onTimesUp();
         }
     }, 1000);
+}
+
+function stopTimer() {
+    console.log('stop timer...');
+    onTimesUp();
 }
 
 function formatTime(time) {
